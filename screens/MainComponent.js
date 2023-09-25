@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import { Icon } from "react-native-elements";
 import HomeScreen from "./HomeScreen";
 import ButtonsScreen from "./ButtonsScreen";
+import IntensityScreen from "./IntensityScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -29,6 +30,13 @@ const HomeNavigator = () => {
         component={ButtonsScreen}
         options={({ navigation }) => ({
           title: "Choose Your Emotion or Urge",
+        })}
+      />
+      <Stack.Screen
+        name="IntensityScreen"
+        component={IntensityScreen}
+        options={({ navigation }) => ({
+          title: "Intensity",
         })}
       />
     </Stack.Navigator>
