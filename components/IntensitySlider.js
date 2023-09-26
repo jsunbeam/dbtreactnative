@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { Text, SafeAreaView, StyleSheet, View } from "react-native";
-import { Slider, Icon } from "react-native-elements";
+import { Button, Slider, Icon } from "react-native-elements";
 
 const IntensitySlider = () => {
-  const [value, setValue] = useState(1);
-
+  const [intensity, setIntensity] = useState(1);
+  // console.log("intensity", intensity);
   return (
     <View style={{ flex: 1, alignItems: "stretch", justifyContent: "center" }}>
       <Slider
         allowTouchTrack
         style={styles.slider}
-        value={value}
-        onValueChange={setValue}
+        value={intensity}
+        onValueChange={setIntensity}
         maximumValue={10}
         minimumValue={1}
         step={1}
@@ -20,7 +20,7 @@ const IntensitySlider = () => {
         thumbProps={{
           children: (
             <Icon
-              name="heartbeat"
+              name="fire"
               type="font-awesome"
               size={20}
               reverse
@@ -30,7 +30,11 @@ const IntensitySlider = () => {
           ),
         }}
       />
-      <Text>Intensity: {value}</Text>
+      <Text>Intensity: {intensity}</Text>
+      <Button
+        title="Submit"
+        onPress={() => navigation.navigate("Skills", { intensity })}
+      />
     </View>
   );
 };

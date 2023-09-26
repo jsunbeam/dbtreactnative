@@ -3,6 +3,7 @@ import { Icon } from "react-native-elements";
 import HomeScreen from "./HomeScreen";
 import ButtonsScreen from "./ButtonsScreen";
 import IntensityScreen from "./IntensityScreen";
+import SkillsScreen from "./SkillsScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -37,6 +38,13 @@ const HomeNavigator = () => {
         component={IntensityScreen}
         options={({ navigation }) => ({
           title: "Intensity",
+        })}
+      />
+      <Stack.Screen
+        name="Skills"
+        component={SkillsScreen}
+        options={({ navigation }) => ({
+          title: "DBT Skills",
         })}
       />
     </Stack.Navigator>
