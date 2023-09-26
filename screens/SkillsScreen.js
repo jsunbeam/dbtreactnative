@@ -5,7 +5,7 @@ const SkillsScreen = ({ route, navigation }) => {
   const { intensity } = route.params;
   console.log("skillsscreen intensity", intensity);
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <SkillCard intensity={intensity} />
     </View>
   );
