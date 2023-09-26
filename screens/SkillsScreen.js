@@ -1,4 +1,4 @@
-import SkillCard from "../components/SkillCard";
+import { SkillCardBack, SkillCardFront } from "../components/SkillCard";
 import { StyleSheet, View } from "react-native";
 import FlipCard from "../components/FlipCard";
 import { Card } from "react-native-elements";
@@ -12,12 +12,12 @@ const SkillsScreen = ({ route, navigation }) => {
       <FlipCard
         front={
           <Card>
-            <SkillCard />
+            <SkillCardFront intensity={intensity} />
           </Card>
         }
         back={
           <Card>
-            <Text>Back</Text>
+            <SkillCardBack intensity={intensity} />
           </Card>
         }
       />

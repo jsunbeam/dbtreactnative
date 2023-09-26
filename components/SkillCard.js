@@ -3,7 +3,7 @@ import { cardsArray } from "../shared/cardsSlice";
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 
-const SkillCard = ({ intensity }) => {
+export const SkillCardFront = ({ intensity }) => {
   console.log("SkillCard", intensity);
 
   const getRandomSkill = (intensity) => {
@@ -48,11 +48,43 @@ const SkillCard = ({ intensity }) => {
   );
 };
 
+export const SkillCardBack = ({ intensity }) => {
+  console.log("SkillCard", intensity);
+
+  const getRandomSkill = (intensity) => {
+    const intensityArray = cardsArray.filter(
+      (skill) => skill.intensity >= intensity
+    );
+    // console.log("intensityarray", intensityArray);
+    return intensityArray[Math.floor(Math.random() * intensityArray.length)];
+  };
+
+  const [currentSkill, setCurrentSkill] = useState(getRandomSkill(intensity));
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const handleNextSkill = () => {
+    const newRandomSkill = getRandomSkill(intensity);
+    setCurrentSkill(newRandomSkill);
+  };
+
+  const cardTitle = currentSkill.name;
+  const cardId = currentSkill.id;
+  const cardDescription = currentSkill.description;
+  const cardContent = currentSkill.content;
+
+  return (
+    <>
+      <Card style={{ flex: isFlipped ? 1 : 0 }}>
+        <Text>{cardTitle}</Text>
+        <Text>{cardContent}</Text>
+      </Card>
+    </>
+  );
+};
+
 const styles = StyleSheet.create({
   card: {
     flex: 1,
     marginBottom: 20,
   },
 });
-
-export default SkillCard;
