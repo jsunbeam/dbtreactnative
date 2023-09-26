@@ -3,33 +3,38 @@ import { cardsArray } from "../shared/cardsSlice";
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 
-export const SkillCardFront = ({ intensity }) => {
+// const [currentSkill, setCurrentSkill] = useState(getRandomSkill(intensity));
+
+export const SkillCardFront = (props) => {
+  const { intensity } = props;
+  const { skill } = props;
   console.log("SkillCard", intensity);
+  console.log("skill", skill);
 
-  const getRandomSkill = (intensity) => {
-    const intensityArray = cardsArray.filter(
-      (skill) => skill.intensity >= intensity
-    );
-    // console.log("intensityarray", intensityArray);
-    return intensityArray[Math.floor(Math.random() * intensityArray.length)];
-  };
+  //   const getRandomSkill = (intensity) => {
+  //     const intensityArray = cardsArray.filter(
+  //       (skill) => skill.intensity >= intensity
+  //     );
+  //     // console.log("intensityarray", intensityArray);
+  //     return intensityArray[Math.floor(Math.random() * intensityArray.length)];
+  //   };
 
-  const [currentSkill, setCurrentSkill] = useState(getRandomSkill(intensity));
-  const [isFlipped, setIsFlipped] = useState(false);
+  //   const [currentSkill, setCurrentSkill] = useState(getRandomSkill(intensity));
+  //   const [isFlipped, setIsFlipped] = useState(false);
 
-  const handleNextSkill = () => {
-    const newRandomSkill = getRandomSkill(intensity);
-    setCurrentSkill(newRandomSkill);
-  };
+  //   const handleNextSkill = () => {
+  //     const newRandomSkill = getRandomSkill(intensity);
+  //     setCurrentSkill(newRandomSkill);
+  //   };
 
-  const cardTitle = currentSkill.name;
-  const cardId = currentSkill.id;
-  const cardDescription = currentSkill.description;
-  const cardContent = currentSkill.content;
+  const cardTitle = skill.name;
+  const cardId = skill.id;
+  const cardDescription = skill.description;
+  const cardContent = skill.content;
 
   return (
     <>
-      <Card containerStyle={styles.card} style={{ flex: isFlipped ? 0 : 1 }}>
+      <Card containerStyle={styles.card}>
         <Text>{cardTitle}</Text>
         <Text>{cardDescription}</Text>
         <Button
@@ -37,7 +42,7 @@ export const SkillCardFront = ({ intensity }) => {
           buttonStyle={{ backgroundColor: "#8CC0DE", height: 70 }}
           containerStyle={{ marginBottom: 10, width: 200 }}
           titleStyle={{ color: "black", fontSize: 22 }}
-          onPress={handleNextSkill}
+          //   onPress={handleNextSkill}
         ></Button>
       </Card>
       {/* <Card style={{ flex: isFlipped ? 1 : 0 }}>
@@ -48,33 +53,24 @@ export const SkillCardFront = ({ intensity }) => {
   );
 };
 
-export const SkillCardBack = ({ intensity }) => {
+export const SkillCardBack = (props) => {
+  const { intensity } = props;
+  const { skill } = props;
   console.log("SkillCard", intensity);
 
-  const getRandomSkill = (intensity) => {
-    const intensityArray = cardsArray.filter(
-      (skill) => skill.intensity >= intensity
-    );
-    // console.log("intensityarray", intensityArray);
-    return intensityArray[Math.floor(Math.random() * intensityArray.length)];
-  };
+  //   const handleNextSkill = () => {
+  //     const newRandomSkill = getRandomSkill(intensity);
+  //     setCurrentSkill(newRandomSkill);
+  //   };
 
-  const [currentSkill, setCurrentSkill] = useState(getRandomSkill(intensity));
-  const [isFlipped, setIsFlipped] = useState(false);
-
-  const handleNextSkill = () => {
-    const newRandomSkill = getRandomSkill(intensity);
-    setCurrentSkill(newRandomSkill);
-  };
-
-  const cardTitle = currentSkill.name;
-  const cardId = currentSkill.id;
-  const cardDescription = currentSkill.description;
-  const cardContent = currentSkill.content;
+  const cardTitle = skill.name;
+  const cardId = skill.id;
+  const cardDescription = skill.description;
+  const cardContent = skill.content;
 
   return (
     <>
-      <Card style={{ flex: isFlipped ? 1 : 0 }}>
+      <Card>
         <Text>{cardTitle}</Text>
         <Text>{cardContent}</Text>
       </Card>
