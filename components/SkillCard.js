@@ -22,10 +22,6 @@ const SkillCard = ({ intensity }) => {
     setCurrentSkill(newRandomSkill);
   };
 
-  const handlePracticeSkill = () => {
-    setIsFlipped(!isFlipped);
-  };
-
   const cardTitle = currentSkill.name;
   const cardId = currentSkill.id;
   const cardDescription = currentSkill.description;
@@ -37,13 +33,6 @@ const SkillCard = ({ intensity }) => {
         <Text>{cardTitle}</Text>
         <Text>{cardDescription}</Text>
         <Button
-          title="Practice Skill"
-          buttonStyle={{ backgroundColor: "#8CC0DE", height: 70 }}
-          containerStyle={{ marginBottom: 10, width: 200 }}
-          titleStyle={{ color: "black", fontSize: 22 }}
-          onPress={handlePracticeSkill}
-        ></Button>
-        <Button
           title="Next Skill"
           buttonStyle={{ backgroundColor: "#8CC0DE", height: 70 }}
           containerStyle={{ marginBottom: 10, width: 200 }}
@@ -51,10 +40,10 @@ const SkillCard = ({ intensity }) => {
           onPress={handleNextSkill}
         ></Button>
       </Card>
-      <Card style={{ flex: isFlipped ? 1 : 0 }}>
+      {/* <Card style={{ flex: isFlipped ? 1 : 0 }}>
         <Text>{cardTitle}</Text>
         <Text>{cardContent}</Text>
-      </Card>
+      </Card> */}
     </>
   );
 };
