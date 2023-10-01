@@ -27,16 +27,8 @@ const SkillsScreen = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <FlipCard
-        front={
-          <Card>
-            <SkillCardFront intensity={intensity} skill={currentSkill} />
-          </Card>
-        }
-        back={
-          <Card>
-            <SkillCardBack intensity={intensity} skill={currentSkill} />
-          </Card>
-        }
+        front={<SkillCardFront intensity={intensity} skill={currentSkill} />}
+        back={<SkillCardBack intensity={intensity} skill={currentSkill} />}
       />
       <Button
         title="Next Skill"
