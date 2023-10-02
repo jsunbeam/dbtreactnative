@@ -103,8 +103,8 @@ const Main = () => {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={({ route }) => ({
-        tabBarActiveBackgroundColor: "black", // Change this for the active tab background color
-        tabBarInactiveBackgroundColor: "#FFD9C0", // Change this for the inactive tab background color
+        tabBarActiveBackgroundColor: "blue",
+        tabBarInactiveBackgroundColor: "#FFD9C0",
         tabBarLabelStyle: { fontSize: 18 },
         tabBarActiveTintColor: "black",
         tabBarInactiveTintColor: "black",
@@ -114,9 +114,33 @@ const Main = () => {
         labelStyle: { fontSize: 18, color: "black" },
       }}
     >
-      <Tab.Screen name="Home" component={HomeNavigator} />
-      <Tab.Screen name="Favorites" component={FavoritesNavigator} />
-      <Tab.Screen name="Account" component={AccountNavigator} />
+      <Tab.Screen
+        name="Home"
+        component={HomeNavigator}
+        options={{
+          tabBarIcon: () => (
+            <Icon name="home" type="font-awesome" size={24} color="black" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Favorites"
+        component={FavoritesNavigator}
+        options={{
+          tabBarIcon: () => (
+            <Icon name="heart" type="font-awesome" size={24} color="black" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Account"
+        component={AccountNavigator}
+        options={{
+          tabBarIcon: () => (
+            <Icon name="user" type="font-awesome" size={24} color="black" />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
