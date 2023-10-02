@@ -5,11 +5,15 @@ import FlipCard from "../components/FlipCard";
 import { Button, Card } from "react-native-elements";
 import { Text } from "react-native";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { addXP } from "../redux/xpSlice";
+import { toggleFavorite } from "../redux/favoritesSlice";
 
 const SkillsScreen = ({ route, navigation }) => {
   const { intensity } = route.params;
+  const favorites = useSelector((state) => state.favorites);
+  const dispatch = useDispatch();
+
   const getRandomSkill = (intensity) => {
     const intensityArray = cardsArray.filter(
       (skill) => skill.intensity >= intensity
@@ -25,7 +29,6 @@ const SkillsScreen = ({ route, navigation }) => {
     setCurrentSkill(newRandomSkill);
   };
 
-  const dispatch = useDispatch();
   const handleAddXP = (xp) => {
     dispatch(addXP(xp));
     console.log("xp to add", xp);
@@ -35,7 +38,14 @@ const SkillsScreen = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <FlipCard
-        front={<SkillCardFront intensity={intensity} skill={currentSkill} />}
+        front={
+          <SkillCardFront
+            intensity={intensity}
+            skill={currentSkill}
+            isFavorite={favorites.includes(currentSkill.id)}
+            markFavorite={() => dispatch(toggleFavorite(currentSkill.id))}
+          />
+        }
         back={<SkillCardBack intensity={intensity} skill={currentSkill} />}
       />
       <Button

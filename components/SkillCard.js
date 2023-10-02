@@ -1,7 +1,7 @@
-import { Button, Card, Text } from "react-native-elements";
+import { Button, Card, Icon, Text } from "react-native-elements";
 import { cardsArray } from "../shared/cardsSlice";
 import { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 // const [currentSkill, setCurrentSkill] = useState(getRandomSkill(intensity));
 
@@ -21,6 +21,20 @@ export const SkillCardFront = (props) => {
       <Card containerStyle={styles.card}>
         <Text>{cardTitle}</Text>
         <Text>{cardDescription}</Text>
+        <View>
+          <Icon
+            name={props.isFavorite ? "heart" : "heart-o"}
+            type="font-awesome"
+            color="#f50"
+            raised
+            reverse
+            onPress={() =>
+              props.isFavorite
+                ? console.log("Already set as a favorite")
+                : props.markFavorite()
+            }
+          />
+        </View>
       </Card>
     </>
   );

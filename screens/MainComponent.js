@@ -5,6 +5,7 @@ import AccountScreen from "./AccountScreen";
 import ButtonsScreen from "./ButtonsScreen";
 import IntensityScreen from "./IntensityScreen";
 import SkillsScreen from "./SkillsScreen";
+import FavoritesScreen from "./FavoritesScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -70,6 +71,31 @@ const AccountNavigator = () => {
   );
 };
 
+const FavoritesNavigator = () => {
+  const Stack = createStackNavigator();
+  return (
+    <Stack.Navigator screenOptions={screenOptions}>
+      <Stack.Screen
+        name="Favorites"
+        component={FavoritesScreen}
+        options={({ navigation }) => ({
+          title: "Favorites",
+          headerLeft: () => (
+            <Icon name="heart" type="font-awesome" style={{ marginLeft: 20 }} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="Skills"
+        component={SkillsScreen}
+        options={({ navigation }) => ({
+          title: "DBT Skills",
+        })}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const Main = () => {
   const Tab = createBottomTabNavigator();
 
@@ -89,6 +115,7 @@ const Main = () => {
       }}
     >
       <Tab.Screen name="Home" component={HomeNavigator} />
+      <Tab.Screen name="Favorites" component={FavoritesNavigator} />
       <Tab.Screen name="Account" component={AccountNavigator} />
     </Tab.Navigator>
   );
