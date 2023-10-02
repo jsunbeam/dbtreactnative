@@ -1,6 +1,7 @@
 import { View, Text } from "react-native";
 import { Icon } from "react-native-elements";
 import HomeScreen from "./HomeScreen";
+import AccountScreen from "./AccountScreen";
 import ButtonsScreen from "./ButtonsScreen";
 import IntensityScreen from "./IntensityScreen";
 import SkillsScreen from "./SkillsScreen";
@@ -51,6 +52,24 @@ const HomeNavigator = () => {
   );
 };
 
+const AccountNavigator = () => {
+  const Stack = createStackNavigator();
+  return (
+    <Stack.Navigator screenOptions={screenOptions}>
+      <Stack.Screen
+        name="Account"
+        component={AccountScreen}
+        options={({ navigation }) => ({
+          title: "Account",
+          headerLeft: () => (
+            <Icon name="user" type="font-awesome" style={{ marginLeft: 20 }} />
+          ),
+        })}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const Main = () => {
   const Tab = createBottomTabNavigator();
 
@@ -70,6 +89,7 @@ const Main = () => {
       }}
     >
       <Tab.Screen name="Home" component={HomeNavigator} />
+      <Tab.Screen name="Account" component={AccountNavigator} />
     </Tab.Navigator>
   );
 };

@@ -5,6 +5,8 @@ import FlipCard from "../components/FlipCard";
 import { Button, Card } from "react-native-elements";
 import { Text } from "react-native";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addXP } from "../redux/xpSlice";
 
 const SkillsScreen = ({ route, navigation }) => {
   const { intensity } = route.params;
@@ -23,6 +25,12 @@ const SkillsScreen = ({ route, navigation }) => {
     setCurrentSkill(newRandomSkill);
   };
 
+  const dispatch = useDispatch();
+  const handleAddXP = (xp) => {
+    dispatch(addXP(xp));
+    console.log("xp to add", xp);
+  };
+
   console.log("skillsscreen intensity", intensity);
   return (
     <View style={styles.container}>
@@ -36,6 +44,13 @@ const SkillsScreen = ({ route, navigation }) => {
         containerStyle={{ marginBottom: 10, width: 200 }}
         titleStyle={{ color: "black", fontSize: 22 }}
         onPress={handleNextSkill}
+      ></Button>
+      <Button
+        title="I practiced this skill!"
+        buttonStyle={{ backgroundColor: "#8CC0DE", height: 70 }}
+        containerStyle={{ marginBottom: 10, width: 200 }}
+        titleStyle={{ color: "black", fontSize: 22 }}
+        onPress={() => handleAddXP(100)}
       ></Button>
     </View>
   );
