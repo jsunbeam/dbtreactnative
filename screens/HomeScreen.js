@@ -36,6 +36,7 @@ const HomeScreen = ({ navigation }) => {
         buttonStyle={{ backgroundColor: "#f77474", height: 70 }}
         containerStyle={{ width: 200 }}
         titleStyle={{ color: "black", fontSize: 22 }}
+        onPress={() => navigation.navigate("Skills", { intensity: 10 })}
       />
     </View>
   );
