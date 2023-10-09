@@ -103,8 +103,6 @@ const Main = () => {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={({ route }) => ({
-        tabBarActiveBackgroundColor: "blue",
-        tabBarInactiveBackgroundColor: "#FFD9C0",
         tabBarLabelStyle: { fontSize: 18 },
         tabBarActiveTintColor: "black",
         tabBarInactiveTintColor: "black",
@@ -112,6 +110,8 @@ const Main = () => {
       tabBarOptions={{
         style: { backgroundColor: "#FFD9C0" },
         labelStyle: { fontSize: 18, color: "black" },
+        activeBackgroundColor: "#FFCAA7",
+        inactiveBackgroundColor: "#FFD9C0",
       }}
     >
       <Tab.Screen
