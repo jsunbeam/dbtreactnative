@@ -48,20 +48,22 @@ const SkillsScreen = ({ route, navigation }) => {
         }
         back={<SkillCardBack intensity={intensity} skill={currentSkill} />}
       />
-      <Button
-        title="Next Skill"
-        buttonStyle={{ backgroundColor: "#8CC0DE", height: 70 }}
-        containerStyle={{ marginBottom: 10, width: 200 }}
-        titleStyle={{ color: "black", fontSize: 22 }}
-        onPress={handleNextSkill}
-      ></Button>
-      <Button
-        title="I practiced this skill!"
-        buttonStyle={{ backgroundColor: "#8CC0DE", height: 70 }}
-        containerStyle={{ marginBottom: 10, width: 200 }}
-        titleStyle={{ color: "black", fontSize: 22 }}
-        onPress={() => handleAddXP(100)}
-      ></Button>
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Next Skill"
+          buttonStyle={{ backgroundColor: "#8CC0DE", height: 70, margin: 10 }}
+          containerStyle={{ marginBottom: 10, width: 130 }}
+          titleStyle={{ color: "black", fontSize: 22 }}
+          onPress={handleNextSkill}
+        ></Button>
+        <Button
+          title="I practiced this skill!"
+          buttonStyle={{ backgroundColor: "#8CC0DE", height: 70, margin: 10 }}
+          containerStyle={{ marginBottom: 10, width: 220 }}
+          titleStyle={{ color: "black", fontSize: 22 }}
+          onPress={() => handleAddXP(100)}
+        ></Button>
+      </View>
     </View>
   );
 };
@@ -73,6 +75,9 @@ const styles = StyleSheet.create({
     paddingTop: 200,
     backgroundColor: "#ecf0f1",
     padding: 8,
+  },
+  buttonContainer: {
+    flexDirection: "row",
   },
 });
 

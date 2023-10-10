@@ -24,7 +24,6 @@ export const SkillCardFront = (props) => {
         {/* <Text>{cardTitle}</Text>
         <Text>{cardDescription}</Text> */}
         {/* <Card.Image source={require(cardFront)} /> */}
-        <Card.Image source={cardFront} style={styles.image} />
         <View>
           <Icon
             name={props.isFavorite ? "heart" : "heart-o"}
@@ -39,6 +38,7 @@ export const SkillCardFront = (props) => {
             }
           />
         </View>
+        <Card.Image source={cardFront} style={styles.image} />
       </Card>
     </>
   );

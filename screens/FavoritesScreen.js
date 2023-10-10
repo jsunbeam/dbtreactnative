@@ -17,6 +17,7 @@ const FavoritesScreen = () => {
   const dispatch = useDispatch();
 
   const renderFavoriteItem = ({ item: skill }) => {
+    const intensity = skill.intensity;
     return (
       <SwipeRow rightOpenValue={-100}>
         <View style={styles.deleteView}>
@@ -46,7 +47,7 @@ const FavoritesScreen = () => {
         </View>
         <View>
           <ListItem
-            onPress={() => navigation.navigate("CampsiteInfo", { campsite })}
+            onPress={() => navigation.navigate("Skills", { intensity })}
           >
             <ListItem.Content>
               <ListItem.Title>{skill.name}</ListItem.Title>
