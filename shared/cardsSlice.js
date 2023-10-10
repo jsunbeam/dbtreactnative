@@ -5,6 +5,8 @@ export const cardsArray = [
     module: "Distress Tolerance",
     //intensity number is set to the highest number that the skill will appear for
     intensity: 10,
+    front: require("../assets/images/tipp-front.png"),
+    back: require("../assets/images/tipp-back.png"),
     description:
       "Change your body chemistry using the TIPP skill. T - Temperature I - Intense Exericse P - Paced Breathing P - Progressive Muscle Relaxation",
     content:
@@ -15,6 +17,8 @@ export const cardsArray = [
     id: 1,
     module: "Distress Tolerance",
     intensity: 10,
+    front: require("../assets/images/self-soothe-front.png"),
+    back: require("../assets/images/self-soothe-back.png"),
     description:
       "Self soothe with the 5 senses: Sight, hearing, smell, taste, touch.",
     content:
@@ -25,6 +29,8 @@ export const cardsArray = [
     id: 2,
     module: "Distress Tolerance",
     intensity: 10,
+    front: require("../assets/images/accepts-front.png"),
+    back: require("../assets/images/accepts-back.png"),
     description:
       "Distract with ACCEPTS: A - Activities C - Contributing C - Comparisons E - Emotions P - Pushing Away T - Thoughts S - Sensations",
     content:
@@ -35,6 +41,8 @@ export const cardsArray = [
     id: 3,
     module: "Emotion Regulation",
     intensity: 4,
+    front: require("../assets/images/opposite-to-emotion-front.png"),
+    back: require("../assets/images/opposite-to-emotion-back.png"),
     description:
       "Taking actions that are opposite to the urges of your current emotion.",
     content:
