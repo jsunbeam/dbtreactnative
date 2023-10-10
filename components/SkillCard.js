@@ -31,11 +31,7 @@ export const SkillCardFront = (props) => {
             color="#f50"
             raised
             reverse
-            onPress={() =>
-              props.isFavorite
-                ? console.log("Already set as a favorite")
-                : props.markFavorite()
-            }
+            onPress={() => props.markFavorite()}
           />
         </View>
         <Card.Image source={cardFront} style={styles.image} />

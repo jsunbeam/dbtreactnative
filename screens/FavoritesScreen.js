@@ -12,12 +12,11 @@ import { SwipeRow } from "react-native-swipe-list-view";
 import { ListItem } from "react-native-elements";
 import { toggleFavorite } from "../redux/favoritesSlice";
 
-const FavoritesScreen = () => {
+const FavoritesScreen = ({ navigation }) => {
   const favorites = useSelector((state) => state.favorites);
   const dispatch = useDispatch();
 
   const renderFavoriteItem = ({ item: skill }) => {
-    const intensity = skill.intensity;
     return (
       <SwipeRow rightOpenValue={-100}>
         <View style={styles.deleteView}>
@@ -47,7 +46,7 @@ const FavoritesScreen = () => {
         </View>
         <View>
           <ListItem
-            onPress={() => navigation.navigate("Skills", { intensity })}
+            onPress={() => navigation.navigate("SingleSkill", { skill })}
           >
             <ListItem.Content>
               <ListItem.Title>{skill.name}</ListItem.Title>

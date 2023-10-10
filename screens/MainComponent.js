@@ -6,6 +6,7 @@ import ButtonsScreen from "./ButtonsScreen";
 import IntensityScreen from "./IntensityScreen";
 import SkillsScreen from "./SkillsScreen";
 import FavoritesScreen from "./FavoritesScreen";
+import SingleSkillScreen from "./SingleSkillScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -86,10 +87,10 @@ const FavoritesNavigator = () => {
         })}
       />
       <Stack.Screen
-        name="Skills"
-        component={SkillsScreen}
+        name="SingleSkill"
+        component={SingleSkillScreen}
         options={({ navigation }) => ({
-          title: "DBT Skills",
+          title: "Favorite Skill",
         })}
       />
     </Stack.Navigator>
