@@ -9,6 +9,8 @@ import FavoritesScreen from "./FavoritesScreen";
 import SingleSkillScreen from "./SingleSkillScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import LoginScreen from "./LoginScreen";
+import RegisterScreen from "./RegisterScreen";
 
 const screenOptions = {
   headerTintColor: "#000",
@@ -97,6 +99,35 @@ const FavoritesNavigator = () => {
   );
 };
 
+const LoginNavigator = () => {
+  const Stack = createStackNavigator();
+  return (
+    <Stack.Navigator screenOptions={screenOptions}>
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={({ navigation }) => ({
+          title: "Login",
+          headerLeft: () => (
+            <Icon
+              name="sign-in"
+              type="font-awesome"
+              style={{ marginLeft: 20 }}
+            />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="Register"
+        component={RegisterScreen}
+        options={({ navigation }) => ({
+          title: "Register",
+        })}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const Main = () => {
   const Tab = createBottomTabNavigator();
 
@@ -139,6 +170,15 @@ const Main = () => {
         options={{
           tabBarIcon: () => (
             <Icon name="user" type="font-awesome" size={24} color="black" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Login"
+        component={LoginNavigator}
+        options={{
+          tabBarIcon: () => (
+            <Icon name="sign-in" type="font-awesome" size={24} color="black" />
           ),
         }}
       />

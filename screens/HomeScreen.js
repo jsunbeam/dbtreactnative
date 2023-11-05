@@ -1,7 +1,21 @@
 import { View, Image, StyleSheet, Text } from "react-native";
 import { Button } from "react-native-elements";
+import axios from "axios";
+import { useEffect } from "react";
 
 const HomeScreen = ({ navigation }) => {
+  //add useEffect here
+  // useEffect(
+  //   axios
+  //     .get("localhost:3000/campsites")
+  //     .then(function (response) {
+  //       console.log(response);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     })
+  // );
+
   return (
     <View style={styles.container}>
       <Image
@@ -19,7 +33,10 @@ const HomeScreen = ({ navigation }) => {
         containerStyle={{ marginBottom: 10, width: 200 }}
         titleStyle={{ color: "black", fontSize: 22 }}
         onPress={() =>
-          navigation.navigate("ButtonsScreen", { selectedButton: "emotions" })
+          navigation.navigate("ButtonsScreen", {
+            selectedButton: "emotions",
+            color: "#8CC0DE",
+          })
         }
       />
       <Button
@@ -28,7 +45,10 @@ const HomeScreen = ({ navigation }) => {
         containerStyle={{ marginBottom: 10, width: 200 }}
         titleStyle={{ color: "black", fontSize: 22 }}
         onPress={() =>
-          navigation.navigate("ButtonsScreen", { selectedButton: "urges" })
+          navigation.navigate("ButtonsScreen", {
+            selectedButton: "urges",
+            color: "#CCEEBC",
+          })
         }
       />
       <Button

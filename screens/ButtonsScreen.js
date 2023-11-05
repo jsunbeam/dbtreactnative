@@ -4,6 +4,7 @@ import { Button } from "react-native-elements";
 
 const ButtonsScreen = ({ route, navigation }) => {
   const { selectedButton } = route.params;
+  const { color } = route.params;
   return (
     <View style={styles.container}>
       {buttonsInfo[selectedButton].map((emotion) => {
@@ -11,7 +12,10 @@ const ButtonsScreen = ({ route, navigation }) => {
           <Button
             key={emotion}
             title={emotion}
+            titleStyle={{ color: "black", fontSize: 18 }}
             onPress={() => navigation.navigate("IntensityScreen")}
+            style={{ marginBottom: 5, width: 200 }}
+            buttonStyle={{ backgroundColor: color }}
           />
         );
       })}
@@ -25,6 +29,7 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FAF0D7",
+    padding: 20,
   },
 });
 

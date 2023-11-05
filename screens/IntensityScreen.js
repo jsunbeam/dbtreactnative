@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FAF0D7",
+    padding: 20,
   },
   slider: {
     width: 300,
