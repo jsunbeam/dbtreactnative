@@ -1,21 +1,7 @@
 import { View, Image, StyleSheet, Text } from "react-native";
 import { Button } from "react-native-elements";
-import axios from "axios";
-import { useEffect } from "react";
 
 const HomeScreen = ({ navigation }) => {
-  //add useEffect here
-  // useEffect(
-  //   axios
-  //     .get("localhost:3000/campsites")
-  //     .then(function (response) {
-  //       console.log(response);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     })
-  // );
-
   return (
     <View style={styles.container}>
       <Image
