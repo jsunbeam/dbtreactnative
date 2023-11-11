@@ -6,7 +6,7 @@ import { Button, Card } from "react-native-elements";
 import { Text } from "react-native";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addXP } from "../redux/xpSlice";
+import { addXP } from "../redux/userSlice";
 import { toggleFavorite } from "../redux/favoritesSlice";
 import { HeaderHeightContext } from "@react-navigation/stack";
 

@@ -2,22 +2,35 @@ import { useEffect, useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { CheckBox, Input, Button, Icon } from "react-native-elements";
 import * as SecureStore from "expo-secure-store";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/userSlice";
 
 const LoginScreen = ({ navigation }) => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
+  const dispatch = useDispatch();
 
   const handleLogin = () => {
-    console.log("username:", username);
-    console.log("password:", password);
-    console.log("remember:", remember);
+    const auth = getAuth();
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        dispatch(setUser({ uid: user.uid, xp: user.xp }));
+        console.log("user", user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
     if (remember) {
       SecureStore.setItemAsync(
         "userinfo",
         JSON.stringify({
-          username,
+          email,
           password,
         })
       ).catch((error) => console.log("Could not save user info", error));
@@ -32,7 +45,7 @@ const LoginScreen = ({ navigation }) => {
     SecureStore.getItemAsync("userinfo").then((userdata) => {
       const userinfo = JSON.parse(userdata);
       if (userinfo) {
-        setUsername(userinfo.username);
+        setEmail(userinfo.email);
         setPassword(userinfo.password);
         setRemember(true);
       }
@@ -42,10 +55,10 @@ const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Input
-        placeholder="Username"
-        leftIcon={{ type: "font-awesome", name: "user-o" }}
-        onChangeText={(text) => setUsername(text)}
-        value={username}
+        placeholder="Email"
+        leftIcon={{ type: "font-awesome", name: "envelope-o" }}
+        onChangeText={(text) => setEmail(text)}
+        value={email}
         containerStyle={styles.formInput}
         leftIconContainerStyle={styles.formIcon}
       />
@@ -99,8 +112,6 @@ const LoginScreen = ({ navigation }) => {
     </View>
   );
 };
-
-const Tab = createBottomTabNavigator();
 
 const styles = StyleSheet.create({
   container: {

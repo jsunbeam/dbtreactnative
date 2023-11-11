@@ -2,26 +2,74 @@ import { useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { CheckBox, Input, Button, Icon } from "react-native-elements";
 import * as SecureStore from "expo-secure-store";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { app, db } from "../firebase.config";
+import { doc, setDoc } from "firebase/firestore";
+import { addXP } from "../redux/xpSlice";
 
 const RegisterScreen = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
+  const [user, setUser] = useState();
 
+  const auth = getAuth(app);
   const handleRegister = () => {
-    const userInfo = {
-      username,
-      password,
-      email,
-      remember,
-    };
-    console.log(JSON.stringify(userInfo));
+    if (email.includes("@") && password.length >= 6) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(async (userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+
+          // Create a document for the user
+          await setDoc(doc(db, "users", user.uid), {
+            xp: 0, // Set initial XP value
+          });
+
+          // Dispatch the action to save the XP in the Redux store
+          dispatch(addXP(0));
+
+          // Navigate to the new page, passing the user's XP as a parameter
+          //   navigation.navigate("NewPage", { xp: 0 });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
+    } else {
+      //handles validation error
+      let errorMessage = "";
+
+      if (!email.includes("@")) {
+        errorMessage += "Invalid email address. ";
+      }
+
+      if (password.length < 6) {
+        errorMessage += "Password should be at least 6 characters long.";
+      }
+
+      if (errorMessage) {
+        alert(errorMessage);
+      } else {
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            // Signed up
+            const user = userCredential.user;
+            // You can add more code here if you want to do something with the user object
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // Handle errors here
+            alert(`Error: ${errorMessage}`);
+          });
+      }
+    }
     if (remember) {
       SecureStore.setItemAsync(
         "userinfo",
         JSON.stringify({
-          username,
+          email,
           password,
         })
       ).catch((error) => console.log("Could not save user info", error));
@@ -36,10 +84,10 @@ const RegisterScreen = () => {
     <View>
       <View style={styles.container}>
         <Input
-          placeholder="Username"
-          leftIcon={{ type: "font-awesome", name: "user-o" }}
-          onChangeText={(text) => setUsername(text)}
-          value={username}
+          placeholder="Email"
+          leftIcon={{ type: "font-awesome", name: "envelope-o" }}
+          onChangeText={(text) => setEmail(text)}
+          value={email}
           containerStyle={styles.formInput}
           leftIconContainerStyle={styles.formIcon}
         />
@@ -48,14 +96,6 @@ const RegisterScreen = () => {
           leftIcon={{ type: "font-awesome", name: "key" }}
           onChangeText={(text) => setPassword(text)}
           value={password}
-          containerStyle={styles.formInput}
-          leftIconContainerStyle={styles.formIcon}
-        />
-        <Input
-          placeholder="Email"
-          leftIcon={{ type: "font-awesome", name: "envelope-o" }}
-          onChangeText={(text) => setEmail(text)}
-          value={email}
           containerStyle={styles.formInput}
           leftIconContainerStyle={styles.formIcon}
         />
