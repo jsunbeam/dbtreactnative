@@ -14,10 +14,13 @@ const userSlice = createSlice({
     addXP: (state, action) => {
       state.currentXP += action.payload;
     },
+    setXP: (state, action) => {
+      state.currentXP = action.payload;
+    },
   },
 });
 
-export const { setUid, clearUser, addXP } = userSlice.actions;
+export const { setUid, clearUser, addXP, setXP } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;
 

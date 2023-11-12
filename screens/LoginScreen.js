@@ -4,12 +4,15 @@ import { CheckBox, Input, Button, Icon } from "react-native-elements";
 import * as SecureStore from "expo-secure-store";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { setUid } from "../redux/userSlice";
+import { setUid, setXP } from "../redux/userSlice";
+import { db } from "../firebase.config";
+import { collection, doc, getDoc } from "firebase/firestore";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
+  const [xpAtLogin, setXpAtLogin] = useState(0);
   const dispatch = useDispatch();
 
   const handleLogin = () => {
@@ -21,6 +24,24 @@ const LoginScreen = ({ navigation }) => {
         const user = userCredential.user;
         dispatch(setUid(user.uid));
         console.log("user", user);
+
+        //retrieve XP from firestore
+        const userRef = doc(collection(db, "users"), user.uid);
+        console.log(userRef);
+        getDoc(userRef)
+          .then((doc) => {
+            if (doc.exists()) {
+              const xp = doc.data().xp;
+              console.log("XP from firestore at login:", xp);
+              dispatch(setXP(xp));
+              // Do something with the XP data
+            } else {
+              console.log("User document does not exist");
+            }
+          })
+          .catch((error) => {
+            console.log("Error retrieving XP:", error);
+          });
       })
       .catch((error) => {
         const errorCode = error.code;
