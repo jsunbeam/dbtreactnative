@@ -9,6 +9,6 @@ export const store = configureStore({
     favorites: favoritesReducer,
     user: userReducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(updateUserInFirestore),
+  // middleware: (getDefaultMiddleware) =>
+  //   getDefaultMiddleware().concat(updateUserInFirestore),
 });

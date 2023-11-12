@@ -20,6 +20,7 @@ const RegisterScreen = () => {
         .then(async (userCredential) => {
           // Signed up
           const user = userCredential.user;
+          console.log("user on register", user);
 
           // Create a document for the user
           await setDoc(doc(db, "users", user.uid), {

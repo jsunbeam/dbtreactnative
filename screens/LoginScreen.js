@@ -4,7 +4,7 @@ import { CheckBox, Input, Button, Icon } from "react-native-elements";
 import * as SecureStore from "expo-secure-store";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { setUser } from "../redux/userSlice";
+import { setUid } from "../redux/userSlice";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ const LoginScreen = ({ navigation }) => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        dispatch(setUser({ uid: user.uid, xp: user.xp }));
+        dispatch(setUid(user.uid));
         console.log("user", user);
       })
       .catch((error) => {

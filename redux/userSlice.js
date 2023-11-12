@@ -1,23 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
+import updateUserInFirestore from "./middleware";
 
 const userSlice = createSlice({
   name: "user",
-  initialState: { user: null, currentXP: 0 },
+  initialState: { uid: null, currentXP: 0 },
   reducers: {
-    setUser: (state, action) => {
-      state.user = action.payload;
+    setUid: (state, action) => {
+      state.uid = action.payload;
     },
     clearUser: (state) => {
-      state.user = null;
+      state.uid = null;
     },
     addXP: (state, action) => {
       state.currentXP += action.payload;
-      console.log("state.currentxp", state.currentXP);
     },
   },
 });
 
-export const { setUser, clearUser, addXP } = userSlice.actions;
+export const { setUid, clearUser, addXP } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;
 

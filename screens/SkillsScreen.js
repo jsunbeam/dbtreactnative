@@ -4,16 +4,32 @@ import { StyleSheet, View } from "react-native";
 import FlipCard from "../components/FlipCard";
 import { Button, Card } from "react-native-elements";
 import { Text } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addXP } from "../redux/userSlice";
 import { toggleFavorite } from "../redux/favoritesSlice";
-import { HeaderHeightContext } from "@react-navigation/stack";
+import { useHeaderHeight } from "@react-navigation/stack";
+import updateUserInFirestore from "../redux/middleware";
+import { db } from "../firebase.config"; // import your firestore instance
+import { doc, updateDoc } from "firebase/firestore";
 
 const SkillsScreen = ({ route, navigation }) => {
   const { intensity } = route.params;
   const favorites = useSelector((state) => state.favorites);
+  const currentXP = useSelector((state) => state.user.currentXP);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const headerHeight = useHeaderHeight();
+
+  const userEffect = useEffect(() => {
+    console.log("useEffect");
+    console.log("user", user);
+    if (user) {
+      const userDoc = doc(db, "users", user.uid);
+      console.log("userDoc", userDoc);
+      updateDoc(userDoc, { xp: user.currentXP });
+    }
+  }, [user.currentXP]);
 
   const getRandomSkill = (intensity) => {
     const intensityArray = cardsArray.filter(
@@ -31,57 +47,51 @@ const SkillsScreen = ({ route, navigation }) => {
   };
 
   const handleAddXP = (xp) => {
-    dispatch(addXP(xp));
     console.log("xp to add", xp);
+    dispatch(addXP(xp));
   };
 
   console.log("skillsscreen intensity", intensity);
   return (
-    <HeaderHeightContext.Consumer>
-      {(headerHeight) => (
-        <View style={styles.container}>
-          <View style={[styles.cardContainer, { marginTop: headerHeight }]}>
-            <FlipCard
-              front={
-                <SkillCardFront
-                  intensity={intensity}
-                  skill={currentSkill}
-                  isFavorite={favorites.includes(currentSkill.id)}
-                  markFavorite={() => dispatch(toggleFavorite(currentSkill.id))}
-                />
-              }
-              back={
-                <SkillCardBack intensity={intensity} skill={currentSkill} />
-              }
+    <View style={styles.container}>
+      <View style={[styles.cardContainer, { marginTop: headerHeight }]}>
+        <FlipCard
+          front={
+            <SkillCardFront
+              intensity={intensity}
+              skill={currentSkill}
+              isFavorite={favorites.includes(currentSkill.id)}
+              markFavorite={() => dispatch(toggleFavorite(currentSkill.id))}
             />
-          </View>
-          <View style={styles.buttonContainer}>
-            <Button
-              title="Next Skill"
-              buttonStyle={{
-                backgroundColor: "#8CC0DE",
-                height: 70,
-                margin: 10,
-              }}
-              containerStyle={{ marginBottom: 0, width: 130 }}
-              titleStyle={{ color: "black", fontSize: 22 }}
-              onPress={handleNextSkill}
-            ></Button>
-            <Button
-              title="I practiced this skill!"
-              buttonStyle={{
-                backgroundColor: "#8CC0DE",
-                height: 70,
-                margin: 10,
-              }}
-              containerStyle={{ marginBottom: 0, width: 220 }}
-              titleStyle={{ color: "black", fontSize: 22 }}
-              onPress={() => handleAddXP(100)}
-            ></Button>
-          </View>
-        </View>
-      )}
-    </HeaderHeightContext.Consumer>
+          }
+          back={<SkillCardBack intensity={intensity} skill={currentSkill} />}
+        />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Next Skill"
+          buttonStyle={{
+            backgroundColor: "#8CC0DE",
+            height: 70,
+            margin: 10,
+          }}
+          containerStyle={{ marginBottom: 0, width: 130 }}
+          titleStyle={{ color: "black", fontSize: 22 }}
+          onPress={handleNextSkill}
+        ></Button>
+        <Button
+          title="I practiced this skill!"
+          buttonStyle={{
+            backgroundColor: "#8CC0DE",
+            height: 70,
+            margin: 10,
+          }}
+          containerStyle={{ marginBottom: 0, width: 220 }}
+          titleStyle={{ color: "black", fontSize: 22 }}
+          onPress={() => handleAddXP(3)}
+        ></Button>
+      </View>
+    </View>
   );
 };
 
@@ -89,6 +99,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ecf0f1",
+    marginTop: 100,
     padding: 8,
   },
   cardContainer: {

@@ -6,13 +6,18 @@ import { Button, Card } from "react-native-elements";
 import { Text } from "react-native";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addXP } from "../redux/xpSlice";
+import { addXP } from "../redux/userSlice";
 import { toggleFavorite } from "../redux/favoritesSlice";
 
 const SingleSkillScreen = ({ route, navigation }) => {
   const favorites = useSelector((state) => state.favorites);
   const dispatch = useDispatch();
   const { skill } = route.params;
+
+  const handleAddXP = (xp) => {
+    dispatch(addXP(xp));
+    console.log("xp to add", xp);
+  };
 
   return (
     <View style={styles.container}>
@@ -44,7 +49,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    paddingTop: 200,
+    paddingTop: 100,
     backgroundColor: "#ecf0f1",
     padding: 8,
   },
