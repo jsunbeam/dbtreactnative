@@ -82,47 +82,45 @@ const RegisterScreen = () => {
   };
 
   return (
-    <View>
-      <View style={styles.container}>
-        <Input
-          placeholder="Email"
-          leftIcon={{ type: "font-awesome", name: "envelope-o" }}
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-          containerStyle={styles.formInput}
-          leftIconContainerStyle={styles.formIcon}
+    <View style={styles.container}>
+      <Input
+        placeholder="Email"
+        leftIcon={{ type: "font-awesome", name: "envelope-o" }}
+        onChangeText={(text) => setEmail(text)}
+        value={email}
+        containerStyle={styles.formInput}
+        leftIconContainerStyle={styles.formIcon}
+      />
+      <Input
+        placeholder="Password"
+        leftIcon={{ type: "font-awesome", name: "key" }}
+        onChangeText={(text) => setPassword(text)}
+        value={password}
+        containerStyle={styles.formInput}
+        leftIconContainerStyle={styles.formIcon}
+      />
+      <CheckBox
+        title="Remember Me"
+        center
+        checked={remember}
+        onPress={() => setRemember(!remember)}
+        containerStyle={styles.formCheckbox}
+      />
+      <View style={styles.formButton}>
+        <Button
+          onPress={() => handleRegister()}
+          title="Register"
+          titleStyle={{ color: "#000" }}
+          icon={
+            <Icon
+              name="user-plus"
+              type="font-awesome"
+              color="#000"
+              iconStyle={{ marginRight: 10 }}
+            />
+          }
+          buttonStyle={{ backgroundColor: "#8CC0DE" }}
         />
-        <Input
-          placeholder="Password"
-          leftIcon={{ type: "font-awesome", name: "key" }}
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-          containerStyle={styles.formInput}
-          leftIconContainerStyle={styles.formIcon}
-        />
-        <CheckBox
-          title="Remember Me"
-          center
-          checked={remember}
-          onPress={() => setRemember(!remember)}
-          containerStyle={styles.formCheckbox}
-        />
-        <View style={styles.formButton}>
-          <Button
-            onPress={() => handleRegister()}
-            title="Register"
-            color="#5637DD"
-            icon={
-              <Icon
-                name="user-plus"
-                type="font-awesome"
-                color="#fff"
-                iconStyle={{ marginRight: 10 }}
-              />
-            }
-            buttonStyle={{ backgroundColor: "#5637DD" }}
-          />
-        </View>
       </View>
     </View>
   );
@@ -130,8 +128,10 @@ const RegisterScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
-    margin: 10,
+    flex: 1,
+    justifyContent: "left",
+    padding: 10,
+    backgroundColor: "#FAF0D7",
   },
   formIcon: {
     marginRight: 10,

@@ -102,16 +102,16 @@ const LoginScreen = ({ navigation }) => {
         <Button
           onPress={() => handleLogin()}
           title="Login"
-          color="#5637DD"
+          titleStyle={{ color: "#000" }}
           icon={
             <Icon
               name="sign-in"
               type="font-awesome"
-              color="#fff"
+              color="#000"
               iconStyle={{ marginRight: 10 }}
             />
           }
-          buttonStyle={{ backgroundColor: "#5637DD" }}
+          buttonStyle={{ backgroundColor: "#8CC0DE" }}
         />
       </View>
       <View style={styles.formButton}>
@@ -123,11 +123,11 @@ const LoginScreen = ({ navigation }) => {
             <Icon
               name="user-plus"
               type="font-awesome"
-              color="blue"
+              color="black"
               iconStyle={{ marginRight: 10 }}
             />
           }
-          titleStyle={{ color: "blue" }}
+          titleStyle={{ color: "black" }}
         />
       </View>
     </View>
@@ -136,8 +136,10 @@ const LoginScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
-    margin: 10,
+    flex: 1,
+    justifyContent: "left",
+    padding: 10,
+    backgroundColor: "#FAF0D7",
   },
   formIcon: {
     marginRight: 10,

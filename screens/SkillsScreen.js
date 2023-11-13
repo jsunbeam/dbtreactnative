@@ -88,7 +88,7 @@ const SkillsScreen = ({ route, navigation }) => {
           }}
           containerStyle={{ marginBottom: 0, width: 220 }}
           titleStyle={{ color: "black", fontSize: 22 }}
-          onPress={() => handleAddXP(3)}
+          onPress={() => handleAddXP(100)}
         ></Button>
       </View>
     </View>
